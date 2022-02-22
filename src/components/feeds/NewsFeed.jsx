@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, FormControl, Button, Modal } from "react-bootstrap";
+import { Row, Col, Form, Button, Modal } from "react-bootstrap";
 import "./style.css";
 import { useState, useEffect } from "react";
 import SingleNews from "./SingleNews";
@@ -8,7 +8,7 @@ import Loader from "./Loader";
 function NewsFeed({ profile }) {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [post, setPost] = useState("");
+  const [text, setText] = useState("");
   const [addPost, setAddPost] = useState(false);
   const showAddPost = () => setAddPost(true);
   const closeAddPost = () => setAddPost(false);
@@ -29,20 +29,13 @@ function NewsFeed({ profile }) {
   }, []);
 
   const fetchData = async () => {
-    closeAddPost();
     try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/ ",
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-          },
-        }
+      let response = await fetch(`http://localhost:3001/posts`,
       );
       if (response.ok) {
         let dataRes = await response.json();
-
+        
+        closeAddPost();
         setPosts(dataRes);
         setIsLoading(false);
       } else {
@@ -58,17 +51,13 @@ function NewsFeed({ profile }) {
     closeAddPost();
     try {
       const res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts`,
+        `http://localhost:3001/posts`,
         {
-          method: "POST",
+          method:text,
           body: JSON.stringify({
-            text: post,
+            text: "post",
+            user : "62138a69c5ecc5c8f1a65555"
           }),
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-            "Content-type": "application/json",
-          },
         }
       );
       if (res.ok) {
@@ -212,7 +201,7 @@ function NewsFeed({ profile }) {
                   className="w-100 shadow-none border-0"
                   as="textarea"
                   required
-                  onChange={(e) => setPost(e.target.value)}
+                  onChange={(e) => setText(e.target.value)}
                   rows={4}
                 />
               </Form.Group>
@@ -234,7 +223,7 @@ function NewsFeed({ profile }) {
                 <Button
                   onClick={addPostFunction}
                   className="shadow-none modal-post-btn border-0"
-                  disabled={!post}
+                  disabled={!text}
                 >
                   Post
                 </Button>
