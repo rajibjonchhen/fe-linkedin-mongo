@@ -103,7 +103,7 @@ export default function AddEditExperience({
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("experience", selectedPic);
+    formData.append("image", selectedPic);
     try {
       let response = await fetch(
         `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}/picture`,
@@ -115,6 +115,7 @@ export default function AddEditExperience({
       console.log(userId, formData, selectedPic.name, list._id);
       if (response.ok) {
         console.log("Image saved successfully");
+        fetchExperiences()
       } else {
         console.log("Error on uploading image");
       }
