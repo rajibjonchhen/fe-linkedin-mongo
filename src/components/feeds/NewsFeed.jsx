@@ -53,11 +53,14 @@ function NewsFeed({ profile }) {
       const res = await fetch(
         `${process.env.REACT_APP_PROD_URL}/posts`,
         {
-          method:text,
+          method:'POST',
           body: JSON.stringify({
-            text: "post",
-            user : "62138a69c5ecc5c8f1a65555"
+            text: text,
+            user : profile._id
           }),
+          headers:{
+            'Content-Type':'application/json'
+          }
         }
       );
       if (res.ok) {
@@ -196,7 +199,7 @@ function NewsFeed({ profile }) {
           <Modal.Body className="px-1">
             <Form onSubmit={addPostFunction}>
               <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>What do you want to talk about?</Form.Label>
+                <Form.Label>What do you want to talk about????</Form.Label>
                 <Form.Control
                   className="w-100 shadow-none border-0"
                   as="textarea"

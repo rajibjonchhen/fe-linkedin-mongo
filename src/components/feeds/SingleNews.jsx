@@ -24,13 +24,9 @@ function SingleNews({ posts, fetchData }) {
   const handleDeletePost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/` + postId,
+        `${process.env.REACT_APP_PROD_URL}/posts/` + postId,
         {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY
-            `,
-          },
+          method: "DELETE"
         }
       );
 
@@ -50,16 +46,14 @@ function SingleNews({ posts, fetchData }) {
   const handleUpdatePost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/` + postId,
+        `${process.env.REACT_APP_PROD_URL}/posts/` + postId,
         {
           method: "PUT",
           body: JSON.stringify({
             text: text,
           }),
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY
-            `,
+            "Content-Type": "application/json"
           },
         }
       );

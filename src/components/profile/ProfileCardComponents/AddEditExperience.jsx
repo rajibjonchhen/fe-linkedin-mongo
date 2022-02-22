@@ -17,7 +17,7 @@ export default function AddEditExperience({
 
   const [method, setMethod] = useState("POST");
   const [url, setUrl] = useState(
-    `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`
+    `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences`
   );
   const [showDeleteBtn, SetShowDeleteBtn] = useState(false);
   const [heading, setHeading] = useState("Add Experience");
@@ -34,7 +34,7 @@ export default function AddEditExperience({
       setArea(list.area);
       setMethod("PUT");
       setUrl(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${list._id}`
+        `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}`
       );
       setHeading("Edit Experience");
       SetShowDeleteBtn(true);
@@ -63,9 +63,6 @@ export default function AddEditExperience({
         method,
         body: JSON.stringify(experience),
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-
           "Content-Type": "application/JSON",
         },
       });
@@ -86,15 +83,9 @@ export default function AddEditExperience({
     setShowAddExperience(false);
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${list._id}/picture`,
+        `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}/picture`,
         {
           method: "DELETE",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-
-            "Content-Type": "application/JSON",
-          },
         }
       );
       if (response.ok) {
@@ -119,10 +110,6 @@ export default function AddEditExperience({
         {
           method: "POST",
           body: formData,
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-          },
         }
       );
       console.log(userId, formData, selectedPic.name, list._id);
@@ -226,7 +213,6 @@ export default function AddEditExperience({
           variant="primary"
           onClick={(e) => {
             handleSubmit(e);
-            handleSavePic(e);
           }}
         >
           Save changes
