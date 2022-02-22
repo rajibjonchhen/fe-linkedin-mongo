@@ -9,18 +9,13 @@ const PeopleKnow = () => {
 
   let fetchUser = async () => {
     try {
-      let apiCall = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-          },
-        }
+      let response = await fetch(
+        `${process.env.REACT_APP_PROD_URL}/profiles`
       );
-      if (apiCall.ok) {
-        let user = await apiCall.json();
-        setInfo(user);
+      if (response.ok) {
+        let user = await response.json();
+        if(user)
+        setInfo(user.profiles);
       } else {
         console.log("Something wrong");
       }
@@ -43,7 +38,7 @@ const PeopleKnow = () => {
             {" "}
             <h2 className="text-heading-medium pt-3">People you may know</h2>
           </div>
-          {info.slice(3, showMore).map((u) => (
+          {info.slice(0, showMore).map((u) => (
             <Link key={u._id} to={"/OtherUser/" + u._id}>
               <div className="" key={u._id}>
                 <div className="text-dark font-weight-bolder d-flex">

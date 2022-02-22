@@ -16,7 +16,7 @@ const AddEditPic = ({ showAddEditPic, handleCloseAddEditPic, profileImg }) => {
 
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/61e5270f73d5cb0015395a9d/picture`,
+        `${process.env.REACT_APP_PROD_URL}/profiles/61e5270f73d5cb0015395a9d/picture`,
         {
           method: "POST",
           body: formData,

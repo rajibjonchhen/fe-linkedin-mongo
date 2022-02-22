@@ -115,7 +115,7 @@ export default function AddEditExperience({
     formData.append("experience", selectedPic);
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${list._id}/picture`,
+        `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}/picture`,
         {
           method: "POST",
           body: formData,

@@ -13,14 +13,7 @@ function App() {
   const [profile, setProfile] = useState();
 
   const fetchProfile = async () => {
-    let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/me",
-      {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-        },
-      }
+    let response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/6214fc2844fe9da6dc2d643f`
     );
     let data = await response.json();
     if (data) {

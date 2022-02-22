@@ -15,7 +15,7 @@ const OtherUser = ({ userId }) => {
   const fetchProfile = async (id) => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" + id,
+        "http://localhost:3001/profiles/" + id,
         {
           headers: {
             Authorization:

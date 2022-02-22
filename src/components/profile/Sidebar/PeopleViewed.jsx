@@ -10,19 +10,13 @@ const PeopleViewed = () => {
 
   let fetchUser = async () => {
     try {
-      let apiCall = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-          },
-        }
+      let response = await fetch(
+        `${process.env.REACT_APP_PROD_URL}/profiles`
       );
-
-      if (apiCall.ok) {
-        let user = await apiCall.json();
-        setInfo(user);
+      if (response.ok) {
+        let user = await response.json();
+        if(user)
+        setInfo(user.profiles);
       } else {
         console.log("Something wrong");
       }
@@ -45,16 +39,16 @@ const PeopleViewed = () => {
             {" "}
             <h2 className="text-heading-medium pt-3">People also viewed</h2>
           </div>
-          {info.slice(0, showMore).map((u) => (
-            <Link key={u._id} to={"/OtherUser/" + u._id}>
-              <div className="" key={u._id}>
+          {info.slice(0, showMore).map((profile) => (
+            <Link key={profile._id} to={"/OtherUser/" + profile._id}>
+              <div className="" key={profile._id}>
                 <div className="text-dark font-weight-bolder d-flex" href="/">
-                  <img className="img-fluid" src={u.image} alt="user" />
+                  <img className="img-fluid" src={profile.image} alt="user" />
                   <div className="mt-3">
                     <p className="mb-0" style={{ fontSize: "14px" }}>
-                      {u.name} {u.surname}
+                      {profile.name} {profile.surname}
                     </p>
-                    <p className="text-secondary mb-0">{u.title}</p>
+                    <p className="text-secondary mb-0">{profile.title}</p>
                   </div>
                 </div>
                 <div>

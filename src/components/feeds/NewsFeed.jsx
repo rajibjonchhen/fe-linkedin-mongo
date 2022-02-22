@@ -30,7 +30,7 @@ function NewsFeed({ profile }) {
 
   const fetchData = async () => {
     try {
-      let response = await fetch(`http://localhost:3001/posts`,
+      let response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts`,
       );
       if (response.ok) {
         let dataRes = await response.json();
@@ -51,7 +51,7 @@ function NewsFeed({ profile }) {
     closeAddPost();
     try {
       const res = await fetch(
-        `http://localhost:3001/posts`,
+        `${process.env.REACT_APP_PROD_URL}/posts`,
         {
           method:text,
           body: JSON.stringify({

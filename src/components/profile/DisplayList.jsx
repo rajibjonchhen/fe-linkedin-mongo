@@ -27,7 +27,7 @@ const DisplayList = ({list, userId, fetchExperiences}) => {
       <div className="exp-card d-flex justify-content-between  ">
         <div style={{ width: "80px", height: "80px", overflow: "hidden" }}>
           <img
-            src="https://image.shutterstock.com/image-vector/color-square-composition-text-geometric-600w-1337231156.jpg"
+            src={list.image}
             className="w-100 mt-2"
           />
           {/* <img src={list.image} alt="" className="w-100" /> */}
