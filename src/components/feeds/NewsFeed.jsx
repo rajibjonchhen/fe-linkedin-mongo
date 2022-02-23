@@ -6,7 +6,7 @@ import SingleNews from "./SingleNews";
 import Loader from "./Loader";
 
 function NewsFeed({ profile }) {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [text, setText] = useState("");
   const [addPost, setAddPost] = useState(false);
@@ -34,9 +34,9 @@ function NewsFeed({ profile }) {
       );
       if (response.ok) {
         let dataRes = await response.json();
-        
         closeAddPost();
-        setPosts(dataRes);
+        setPosts(dataRes.post);
+        console.log(dataRes)
         setIsLoading(false);
       } else {
         console.log("Error");
