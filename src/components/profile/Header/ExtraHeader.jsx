@@ -15,7 +15,7 @@ function ExtraHeader({ profile }) {
       setInfo(profile);
       setPic(profile.image);
     }
-  }, [profile]);
+  }, []);
 
   const showDropdown = (input) => {
     if (dropdown === input) {
@@ -105,7 +105,7 @@ function ExtraHeader({ profile }) {
                   top: "45px",
                 }}
               >
-                <DropMore />
+              {profile && <DropMore profile={profile}/>}
               </div>
             </div>
           </div>

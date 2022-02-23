@@ -5,10 +5,14 @@ import { parseISO, format } from "date-fns";
 // import PostDropDown from "./PostDropDown";
 import { useState } from "react";
 import { StylesContext } from "@material-ui/styles";
+import {BsImage, BsEmojiSmile} from 'react-icons/bs'
+import AddEditComment from "./newFeedsComponent/AddEditComment";
+import DisplayComment from "./newFeedsComponent/DisplayComment";
+import { GiLinkedRings } from "react-icons/gi";
 
-function SingleNews({ posts, fetchData }) {
+function SingleNews({ post, fetchData, profile }) {
   const [addPost, setAddPost] = useState(false);
-
+  const [showComment, setShowComment] = useState(false)
   const showAddPost = () => setAddPost(true);
   const closeAddPost = () => setAddPost(false);
 
@@ -16,9 +20,8 @@ function SingleNews({ posts, fetchData }) {
   const [text, setText] = useState();
 
   useEffect(() => {
-    setPostId(posts._id);
-    setText(posts.text);
-    console.log("from single post", posts._id);
+    setPostId(post._id);
+    setText(post.text);
   }, []);
 
   const handleDeletePost = async () => {
@@ -34,7 +37,7 @@ function SingleNews({ posts, fetchData }) {
         setAddPost(false);
         fetchData();
       } else if (response.status === 401)
-        alert("You Can not Delete others Posts");
+        alert("You Can not Delete others post");
       else {
         console.log("delete error");
       }
@@ -57,7 +60,7 @@ function SingleNews({ posts, fetchData }) {
           },
         }
       );
-      if (response.status === 401) alert("you can not update others posts");
+      if (response.status === 401) alert("you can not update others post");
       if (response.ok) {
         closeAddPost();
         fetchData();
@@ -122,7 +125,7 @@ function SingleNews({ posts, fetchData }) {
               <div className="d-flex align-items-center mb-3">
                 <img
                   className="nav-profile-image-1"
-                  src={posts.user.image}
+                  src={post.user.image}
                   alt=""
                 ></img>
                 <div className="ml-3">
@@ -131,20 +134,20 @@ function SingleNews({ posts, fetchData }) {
                     style={{ fontSize: "14px", fontWeight: "600" }}
                   >
                     <a
-                      href={"/OtherUser/" + posts.user._id}
+                      href={"/OtherUser/" + post.user._id}
                       style={{
                         color: "black",
                       }}
                     >
-                      {posts.user.name} {posts.user.surname}
+                      {post.user.name} {post.user.surname}
                     </a>
                     <i className="bi bi-dot"></i> 1st
                   </p>
                   <p className="mb-n1" style={{ fontSize: "12px" }}>
-                    {posts.user.title}
+                    {post.user.title}
                   </p>
                   <p className="mb-n1" style={{ fontSize: "10px" }}>
-                    {format(parseISO(posts.updatedAt), "MMMM do yyyy | HH:mm")}
+                    {format(parseISO(post.updatedAt), "MMMM do yyyy | HH:mm")}
                     <i className="bi bi-dot"></i> <i class="bi bi-globe2"></i>
                   </p>
                 </div>
@@ -274,7 +277,7 @@ function SingleNews({ posts, fetchData }) {
                 </div>
               </div>
               <div>
-                <p className="w-100">{posts.text}</p>
+                <p className="w-100">{post.text}</p>
               </div>
               <div>
                 <hr />
@@ -299,7 +302,11 @@ function SingleNews({ posts, fetchData }) {
                     ></i>
                     Like
                   </p>
-                  <p>
+                  <div>
+                    {/* {post && likes.map(like => <div>{like.}</div>)} */}
+                    <div></div>
+                  </div>
+                  <p onClick = {(e) => setShowComment(true)}>
                     <i
                       class="bi bi-chat-dots mr-2"
                       style={{ color: "grey", fontSize: "20px" }}
@@ -324,6 +331,13 @@ function SingleNews({ posts, fetchData }) {
               </div>
             </div>
           </div>
+          {/* add comment section */}
+          <div style={{display:showComment? 'block':'none'}}>
+                {/* comment box */}
+               {profile && <AddEditComment profile={profile} post={post}/>}
+                {/* display comments */}
+                  {post && post.comments.map(comment => <DisplayComment comment={comment}/>)}
+            </div>
         </div>
       </Row>
       <Modal show={addPost} onHide={closeAddPost}>
@@ -332,13 +346,13 @@ function SingleNews({ posts, fetchData }) {
             <Modal.Title>
               Updated Post of
               <a
-                href={"/OtherUser/" + posts.user._id}
+                href={"/OtherUser/" + post.user._id}
                 style={{
                   color: "black",
                 }}
               >
                 {" "}
-                {posts.user.name} {posts.user.surname}
+                {post.user.name} {post.user.surname}
               </a>
             </Modal.Title>
           </Modal.Header>

@@ -151,8 +151,9 @@ function NewsFeed({ profile }) {
                 return (
                   <SingleNews
                     key={post._id}
-                    posts={post}
+                    post={post}
                     fetchData={fetchData}
+                    profile={profile}
                   />
                 );
               })

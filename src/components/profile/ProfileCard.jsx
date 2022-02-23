@@ -166,7 +166,7 @@ const ProfileCard = ({ profile, fetchProfile }) => {
                 borderRadius: "10px 0 10px 10px",
               }}
             >
-              <DropMore />
+              <DropMore profile={profile}/>
             </div>
           </div>
           <div
