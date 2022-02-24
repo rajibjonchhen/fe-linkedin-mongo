@@ -5,8 +5,8 @@ import { parseISO, format } from "date-fns";
 // import PostDropDown from "./PostDropDown";
 import { useState } from "react";
 import { StylesContext } from "@material-ui/styles";
-import {BsImage, BsEmojiSmile} from 'react-icons/bs'
-import {BiLike} from 'react-icons/bi'
+import { BsImage, BsEmojiSmile } from 'react-icons/bs'
+import { BiLike } from 'react-icons/bi'
 import AddEditComment from "./newFeedsComponent/AddEditComment";
 import DisplayComment from "./newFeedsComponent/DisplayComment";
 import { GiLinkedRings } from "react-icons/gi";
@@ -16,6 +16,7 @@ import PostEditDropdown from "./newFeedsComponent/PostEditDropdown";
 function SingleNews({ post, fetchData, profile }) {
   const [addPost, setAddPost] = useState(false);
   const [showComment, setShowComment] = useState(false)
+  const [showReations, setShowReations] = useState(false)
   const showAddPost = () => setAddPost(true);
   const closeAddPost = () => setAddPost(false);
 
@@ -117,7 +118,7 @@ function SingleNews({ post, fetchData, profile }) {
   );
 
   return (
-    <div>{post && 
+    <div>{post &&
       <Row
         className=" start-post-div px-4 pt-4 pb-2 flex-column mb-2"
         style={{ width: "550px" }}
@@ -144,7 +145,7 @@ function SingleNews({ post, fetchData, profile }) {
                     >
                       {post.user.name} {post.user.surname}
                     </a>
-                    <i className="bi bi-dot"></i> 1st
+                    <i className="bi bi-dot ml-auto"></i> 1st
                   </p>
                   <p className="mb-n1" style={{ fontSize: "12px" }}>
                     {post.user.title}
@@ -154,21 +155,21 @@ function SingleNews({ post, fetchData, profile }) {
                     <i className="bi bi-dot"></i> <i className="bi bi-globe2"></i>
                   </p>
                 </div>
-                      <div>
-                      <PostEditDropdown CustomToggle={CustomToggle} CustomMenu={CustomMenu} showAddPost={showAddPost}/>
-                      </div>
+                <div>
+                  <PostEditDropdown CustomToggle={CustomToggle} CustomMenu={CustomMenu} showAddPost={showAddPost} />
+                </div>
               </div>
               <div>
                 <p className="w-100">{post.text}</p>
               </div>
               <div>
                 <hr />
-                  <div className='text-left w-100'>
-                    <p><span className='likes'><BiLike/></span><span style={{display:post.likes.length? 'block':'none'}}>{post.likes.length}</span></p>
-                    <div>
-                      <Likes post={post}/>
-                    </div>
+                <div className='text-left w-100' >
+                  <p onClick={(e) => setShowReations(true)}><span className='likes'><BiLike /></span><span style={{ display: post.likes.length ? 'block' : 'none' }}>{post.likes.length}</span></p>
+                  <div className='pAbsolute w-100 modal-box' style={{display: showReations ? "block" : "none"}}>
+                    <Likes post={post} setShowReations={setShowReations}/>
                   </div>
+                </div>
                 <hr />
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
                   <p
@@ -187,7 +188,7 @@ function SingleNews({ post, fetchData, profile }) {
                     ></i>
                     Like
                   </p>
-                  <p onClick = {(e) => setShowComment(true)}>
+                  <p onClick={(e) => setShowComment(true)}>
                     <i
                       className="bi bi-chat-dots mr-2"
                       style={{ color: "grey", fontSize: "20px" }}
@@ -212,17 +213,17 @@ function SingleNews({ post, fetchData, profile }) {
               </div>
             </div>
           </div>
-          <hr/>
+          <hr />
           {/* add comment section */}
-          <div style={{display:showComment? 'block':'none'}}>
-                {/* comment box */}
-               {profile && <AddEditComment profile={profile} post={post}/>}
-                {/* display comments */}
-                  {/* {post && post.comments.map(comment => <DisplayComment comment={comment}/>)} */}
-            </div>
+          <div style={{ display: showComment ? 'block' : 'none' }} >
+            {/* comment box */}
+            {profile && <AddEditComment profile={profile} post={post} />}
+            {/* display comments */}
+            {/* {post && post.comments.map(comment => <DisplayComment comment={comment}/>)} */}
+          </div>
         </div>
       </Row>
-}
+    }
       <Modal show={addPost} onHide={closeAddPost}>
         <Modal.Dialog className="w-100 border-0 px-3">
           <Modal.Header closeButton>

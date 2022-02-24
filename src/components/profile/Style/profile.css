@@ -70,6 +70,17 @@
   top: 70px;
   left: 5%;
 }
+
+.round{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.round-pic {
+  height: 100%;
+}
 .profile-banner-img {
   height: 200px;
   object-fit: cover;

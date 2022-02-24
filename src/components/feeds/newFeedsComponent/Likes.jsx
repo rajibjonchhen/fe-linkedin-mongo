@@ -1,24 +1,31 @@
 import { Modal } from "react-bootstrap";
 
-function Likes(post) {
+function Likes({post, setShowReations}) {
 
 
     return ( 
         <Modal.Dialog>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={() =>setShowReations(false)}>
         <Modal.Title>Reactions</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="d-flex flex-column text-left">
-       {/* {post && post.likes.map(user => <div>
-            <hr/>
-            <div>
-                <img src={user.image} alt='user who has reacted'/>
+       {post && post.likes.map(user => <div style={{font:'10px'}}>
+
+            <div className='d-flex'>
+            <div className='round'>
+                <img src={user.image} className='round-pic' alt='user who has reacted'/>
             </div>
             <div>
-                {user.name}
+               <p>
+                   {user.name}
+                </p> 
+               <p>
+                   {user.bio}
+                </p> 
             </div>
-        </div>)} */}
+            </div>
+        </div>)}
       </Modal.Body>
 
       <Modal.Footer>
