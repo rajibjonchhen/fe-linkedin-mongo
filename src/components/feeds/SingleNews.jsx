@@ -93,7 +93,17 @@ function SingleNews({ post, fetchData, profile }) {
   ));
 
   const handleLike = async() => {
-    const response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts/${post._id}/likes`)
+    const response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts/${post._id}/likes`,{
+      method: "POST",
+      body: JSON.stringify({user:profile._id}),
+      headers:{
+        "Content-Type" : "application/json"
+      }
+    })
+    if(response.ok){
+      fetchData()
+    }
+
   }
 
   // forwardRef again here!
@@ -177,19 +187,15 @@ function SingleNews({ post, fetchData, profile }) {
                 <hr />
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
                   <p
-                    onClick={() => {
-                      var x = document
-                        .querySelectorAll(".bi-hand-thumbs-up")
-                        .forEach((item) => {
-                          item.style.color = "blue";
-                        });
-                    }}
+                    onClick={() => 
+                      handleLike()
+                        }
                   >
                     <i
                       id="bi-hand-thumbs-up"
                       className="bi bi-hand-thumbs-up mr-2"
-                      style={{ color: "grey", fontSize: "20px" }}
-                      onClick={(e) => handleLike(e) }
+                      style={{ color: "grey", fontSize: "20px", backgroundColor:post.isLiked? "blue":"none" }}
+                
                     ></i>
                     Like
                   </p>

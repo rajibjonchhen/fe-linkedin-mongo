@@ -35,6 +35,11 @@ function NewsFeed({ profile }) {
       if (response.ok) {
         let dataRes = await response.json();
         closeAddPost();
+        dataRes.post.map((item,i) => {
+          const isLiked = (item.likes.find(like => like._id === profile._id))? true:false
+          dataRes.post[i].isLiked = isLiked
+         })
+        console.log( dataRes.post.isLiked)
         setPosts(dataRes.post);
         console.log(dataRes)
         setIsLoading(false);
