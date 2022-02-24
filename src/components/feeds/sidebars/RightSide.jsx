@@ -3,7 +3,7 @@ import React from "react";
 
 function RightSide() {
   return (
-    <>
+    <div style={{position:'relative'}}>
       <div
         className="bg-white p-3 pb-0 w-100 round-border mt-2"
         style={{ fontSize: "12px" }}
@@ -106,7 +106,7 @@ function RightSide() {
           <span>LinkedIn Corporation © 2022</span>
         </p>
       </div>
-    </>
+    </div>
   );
 }
 

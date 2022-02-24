@@ -13,6 +13,7 @@ import { GiLinkedRings } from "react-icons/gi";
 import {AiFillLike, AiOutlineLike} from 'react-icons/ai'
 import Likes from "./newFeedsComponent/Likes";
 import PostEditDropdown from "./newFeedsComponent/PostEditDropdown";
+import EditDeletePost from "./newFeedsComponent/EditDeletePost";
 
 function SingleNews({ post, fetchData, profile }) {
   const [addPost, setAddPost] = useState(false);
@@ -195,8 +196,14 @@ function SingleNews({ post, fetchData, profile }) {
               </div>
               <div>
                
-                <div className='text-left w-100 border-bottom' >
-                  <div className ='d-flex' onClick={(e) => setShowReations(true)}><span className='likes mr-1'><BiLike /></span><span style={{ display: post.likes.length ? 'block' : 'none' }}>{post.likes.length}</span></div>
+                <div className='d-flex justify-content-between text-left w-100  pb-1 border-bottom' style={{fontSize:'13px'}}>
+                  <div className ='d-flex' onClick={(e) => setShowReations(true)} >
+                    <span style={{ display: post.likes.length>0? 'block' : 'none' }} className='likes mr-1 flip-horizontally'><AiFillLike/></span>
+                    <span style={{ display: post.likes.length>0? 'block' : 'none' }}>{post.likes.length}</span>
+                  </div>
+                  <div>
+                   <span style={{display:comments.length>0? 'block':'none'}}>{comments.length} comments</span>
+                  </div>
                   <div className='pAbsolute w-100 modal-box' style={{display: post.likes.length>0 && showReations ? "block" : "none"}}>
                     <Likes post={post} setShowReations={setShowReations}/>
                   </div>
@@ -207,8 +214,8 @@ function SingleNews({ post, fetchData, profile }) {
                     onClick={() => 
                       handleLike()
                         }>
-                    <span  style={{ color: "blue", fontSize: "20px", display:post.isLiked? "block":"none"}}><AiFillLike/></span>
-                    <span style={{ color: "blue", fontSize: "20px", display:!post.isLiked? "block":"none"}}><AiOutlineLike/></span>
+                    <span  className='flip-horizontally' style={{ color: "rgb(55,143,233)", fontSize: "20px", display:post.isLiked? "block":"none"}}><AiFillLike/></span>
+                    <span className='flip-horizontally' style={{ color: "rgb(55,143,233)", fontSize: "20px", display:!post.isLiked? "block":"none"}}><AiOutlineLike/></span>
                     <span className='ml-1'>Like</span>
                   </p>
                   <p onClick={(e) => setShowComment(true)}>
@@ -249,68 +256,7 @@ function SingleNews({ post, fetchData, profile }) {
         </div>
       </Row>
     }
-      <Modal show={addPost} onHide={closeAddPost}>
-        <Modal.Dialog className="w-100 border-0 px-3">
-          <Modal.Header closeButton>
-            <Modal.Title>
-              Updated Post of
-              <a
-                href={"/OtherUser/" + post.user._id}
-                style={{
-                  color: "black",
-                }}
-              >
-                {" "}
-                {post.user.name} {post.user.surname}
-              </a>
-            </Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <Form>
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>What do you want to talk about?</Form.Label>
-                <Form.Control
-                  className="w-100 shadow-none border-0"
-                  as="textarea"
-                  required
-                  value={text}
-                  // onChange={e => setPost(e.target.value)}
-                  rows={4}
-                  onChange={(e) => setText(e.target.value)}
-                />
-              </Form.Group>
-              <div className="d-flex justify-content-between px-3">
-                <div className="d-flex justify-content-between align-items-center">
-                  <i className="bi mr-2 bi-image-fill"></i>
-                  <i className="bi mr-2 bi-youtube"></i>
-                  <i className="bi mr-2 bi-calendar-event"></i>
-                  <i className="bi mr-2 bi-briefcase-fill"></i>
-                  <i className="bi mr-2 bi-patch-check-fill"></i>
-                  <i className="bi mr-2 bi-bar-chart-line"></i>
-                  <i className="bi mr-2 bi-three-dots"></i>
-                </div>
-                <div>
-                  <Button
-                    variant="danger"
-                    className="shadow-none modal-post-btn-delete border-0"
-                    onClick={handleDeletePost}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    className="shadow-none modal-post-btn border-0"
-                    onClick={handleUpdatePost}
-                  >
-                    Save
-                  </Button>
-                </div>
-              </div>
-            </Form>
-          </Modal.Body>
-        </Modal.Dialog>
-      </Modal>
-    </div>
+{post && <EditDeletePost post={post} closeAddPost={closeAddPost} addPost={addPost} text={text} setText={setText} handleDeletePost={handleDeletePost} handleUpdatePost={handleUpdatePost}/>}    </div>
   );
 }
 export default SingleNews;

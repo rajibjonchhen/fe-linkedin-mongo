@@ -2,8 +2,8 @@ import React from "react";
 import MyNavbar from "./MyNavbar";
 import { Row, Col, Container } from "react-bootstrap";
 import NewsFeed from "./NewsFeed";
-import LeftSide from "./LeftSide";
-import RightSide from "./RightSide";
+import LeftSide from "./sidebars/LeftSide";
+import RightSide from "./sidebars/RightSide";
 
 import MyHeaderMain from "../profile/Header/MyHeaderMain";
 import Footer from "../profile/Header/Footer";

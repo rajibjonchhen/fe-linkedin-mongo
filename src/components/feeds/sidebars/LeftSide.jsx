@@ -78,7 +78,7 @@ function LeftSide({ profile }) {
         className="left-sidebar-2 bg-white text-left round-border mt-3  w-100"
         style={{ fontSize: "12px", overflow: "hidden " }}
       >
-        <div className="px-3 bold pt-2">
+        <div className="px-3 bold pt-2" style={{position:'sticky', top:'200px'}}>
           <p className="my-2">Recent</p>
           <p>
             <IoIosPeople className="mr-2" />
