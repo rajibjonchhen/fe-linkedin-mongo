@@ -178,14 +178,14 @@ function SingleNews({ post, fetchData, profile }) {
                 <p className="w-100">{post.text}</p>
               </div>
               <div>
-                <hr />
-                <div className='text-left w-100' >
-                  <p onClick={(e) => setShowReations(true)}><span className='likes'><BiLike /></span><span style={{ display: post.likes.length ? 'block' : 'none' }}>{post.likes.length}</span></p>
+               
+                <div className='text-left w-100 border-bottom' >
+                  <div className ='d-flex' onClick={(e) => setShowReations(true)}><span className='likes mr-1'><BiLike /></span><span style={{ display: post.likes.length ? 'block' : 'none' }}>{post.likes.length}</span></div>
                   <div className='pAbsolute w-100 modal-box' style={{display: post.likes.length>0 && showReations ? "block" : "none"}}>
                     <Likes post={post} setShowReations={setShowReations}/>
                   </div>
                 </div>
-                <hr />
+              
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
                   <div className='d-flex align-items-center'
                     onClick={() => 
@@ -220,7 +220,7 @@ function SingleNews({ post, fetchData, profile }) {
               </div>
             </div>
           </div>
-          <hr />
+        
           {/* add comment section */}
           <div style={{ display: showComment ? 'block' : 'none' }} >
             {/* comment box */}
