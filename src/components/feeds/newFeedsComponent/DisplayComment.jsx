@@ -5,7 +5,7 @@ function DisplayComment({comment}) {
 
 
     return ( 
-        <div className='d-flex my-2 w-100'>
+        <div className='d-flex my-2 w-100 single-comment' >
             <div>
                 <img src={comment.user.image || "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} className="nav-profile-image-1 mr-3" alt='user who  comment'/>
             </div>

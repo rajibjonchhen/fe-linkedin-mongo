@@ -159,14 +159,14 @@
   border-radius: 50%;
 }
 
+
 .single-comment{
-  position:absolute;
-   width:60px;
-   top:5px;
+  width:60px;
+  top:5px;
   right:10px;
   font-size:22px;
-   color:rgb(102,102,102);
-   border-radius: 0 15px 15px 15px ;
+  color:rgb(102,102,102);
+  border-radius: 0 15px 15px 15px ;
   }
 
 .post-btn{
