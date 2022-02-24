@@ -34,7 +34,7 @@ function AddEditComment({profile, post, fetchComments}) {
     return ( 
         <div>
 
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between">
             <img
             className="nav-profile-image-1 mr-3"
             src={profile.image}
@@ -55,11 +55,11 @@ function AddEditComment({profile, post, fetchComments}) {
                     onChange = {(e)=> setCommentObj({...commentObj, comment:e.target.value})}
                     placeholder="Add a comment"
                     />
-        <button onClick={(e) => addComment(e)} className='post-btn'>Post</button>
+                 <button style={{display:commentObj.comment?'block':'none'}}onClick={(e) => addComment(e)} className='post-btn'>Post</button>
                     <div className='d-flex justify-content-around ' style={{position:'absolute', width:'60px',top:'5px' , right:'10px', fontSize:'22px', color:'rgb(102,102,102)'}}>
                         <span className='round-hover px-2' ><BsEmojiSmile/></span>
                         <span className='round-hover px-2'><BsImage/></span>
-                    </div>
+                </div>
             </div>
         </div>
         </div>

@@ -162,7 +162,7 @@ function SingleNews({ post, fetchData, profile }) {
                   className="nav-profile-image-1"
                   src={post.user.image}
                   alt=""
-                ></img>
+                />
                 <div className="ml-3">
                   <p
                     className="mb-n1 mt-n2"
@@ -176,19 +176,19 @@ function SingleNews({ post, fetchData, profile }) {
                     >
                       {post.user.name} {post.user.surname}
                     </a>
-                    <i className="bi bi-dot ml-auto"></i> 1st
+                    <i className="bi bi-dot"/>1st
                   </p>
                   <p className="mb-n1" style={{ fontSize: "12px" }}>
                     {post.user.title}
                   </p>
                   <p className="mb-n1" style={{ fontSize: "10px" }}>
                     {format(parseISO(post.updatedAt), "MMMM do yyyy | HH:mm")}
-                    <i className="bi bi-dot"></i> <i className="bi bi-globe2"></i>
+                    <i className="bi bi-dot"/><i className="bi bi-globe2"/>
                   </p>
                 </div>
-                <div>
-                  <PostEditDropdown CustomToggle={CustomToggle} CustomMenu={CustomMenu} showAddPost={showAddPost} />
-                </div>
+                  <div className='ml-auto'>
+                    <PostEditDropdown CustomToggle={CustomToggle} CustomMenu={CustomMenu} showAddPost={showAddPost} />
+                  </div>
               </div>
               <div>
                 <p className="w-100">{post.text}</p>
@@ -203,14 +203,14 @@ function SingleNews({ post, fetchData, profile }) {
                 </div>
               
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
-                  <div className='d-flex align-items-center'
+                  <p className='d-flex align-items-baseline'
                     onClick={() => 
                       handleLike()
                         }>
                     <span  style={{ color: "blue", fontSize: "20px", display:post.isLiked? "block":"none"}}><AiFillLike/></span>
                     <span style={{ color: "blue", fontSize: "20px", display:!post.isLiked? "block":"none"}}><AiOutlineLike/></span>
-                   <span>Like</span>
-                  </div>
+                    <span className='ml-1'>Like</span>
+                  </p>
                   <p onClick={(e) => setShowComment(true)}>
                     <i
                       className="bi bi-chat-dots mr-2"
