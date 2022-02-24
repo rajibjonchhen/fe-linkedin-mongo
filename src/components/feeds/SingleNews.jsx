@@ -92,6 +92,10 @@ function SingleNews({ post, fetchData, profile }) {
     </a>
   ));
 
+  const handleLike = async() => {
+    const response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts/${post._id}/likes`)
+  }
+
   // forwardRef again here!
   // Dropdown needs access to the DOM of the Menu to measure it
   const CustomMenu = React.forwardRef(
@@ -166,7 +170,7 @@ function SingleNews({ post, fetchData, profile }) {
                 <hr />
                 <div className='text-left w-100' >
                   <p onClick={(e) => setShowReations(true)}><span className='likes'><BiLike /></span><span style={{ display: post.likes.length ? 'block' : 'none' }}>{post.likes.length}</span></p>
-                  <div className='pAbsolute w-100 modal-box' style={{display: showReations ? "block" : "none"}}>
+                  <div className='pAbsolute w-100 modal-box' style={{display: post.likes.length>0 && showReations ? "block" : "none"}}>
                     <Likes post={post} setShowReations={setShowReations}/>
                   </div>
                 </div>
@@ -185,6 +189,7 @@ function SingleNews({ post, fetchData, profile }) {
                       id="bi-hand-thumbs-up"
                       className="bi bi-hand-thumbs-up mr-2"
                       style={{ color: "grey", fontSize: "20px" }}
+                      onClick={(e) => handleLike(e) }
                     ></i>
                     Like
                   </p>

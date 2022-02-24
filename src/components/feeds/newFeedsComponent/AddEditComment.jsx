@@ -20,7 +20,7 @@ function AddEditComment({profile, post}) {
 
 
     const addComment = async() => {
-        const response = await fetch(`${process.env.React_APP_PROD_URL}/posts/${post._id}`,{
+        const response = await fetch(`${process.env.React_APP_PROD_URL}/posts/${post._id}/comments`,{
             method:'POST',
             body:JSON.stringify(comment),
                 headers:{
@@ -52,7 +52,7 @@ function AddEditComment({profile, post}) {
                         textAlign: "left",
                         fontWeight: "normal",
                     }}
-                    
+
                     value = {comment.comment}
                     onChange = {(e)=> handleComment(e)}
                     placeholder="Add a comment"
