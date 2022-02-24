@@ -10,7 +10,7 @@ function Likes({post, setShowReations}) {
       </Modal.Header>
 
       <Modal.Body className="d-flex flex-column text-left">
-       {post && post.likes.map(user => <div style={{font:'10px'}}>
+       {post && post.likes.map((user, i ) => <div key={i} style={{font:'10px'}}>
 
             <div className='d-flex'>
             <div className='round'>

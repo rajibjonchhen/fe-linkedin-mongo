@@ -1,28 +1,20 @@
 import { useState } from 'react';
 import {BsImage, BsEmojiSmile} from 'react-icons/bs'
 
-function AddEditComment({profile, post}) {
+function AddEditComment({profile, post, fetchComments}) {
 
-    const [comment, setComment] = useState({
+    const [commentObj, setCommentObj] = useState({
         comment:'',
         user:profile._id
     }) 
 
 
-    const handleComment = (e) => {
-        e.target.preventDefault()
-        if(e.target.key !== 13){
-            setComment({comment:e.target.value})
-        } else {
-            addComment()
-        }
-    }
-
+   
 
     const addComment = async() => {
-        const response = await fetch(`${process.env.React_APP_PROD_URL}/posts/${post._id}/comments`,{
+    const response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts/${post._id}/comments`,{
             method:'POST',
-            body:JSON.stringify(comment),
+            body:JSON.stringify(commentObj),
                 headers:{
                     "Content-Type":"application/json"
                 }
@@ -30,11 +22,18 @@ function AddEditComment({profile, post}) {
         if(response.ok){
             let data  = await response.json()
             console.log(data)
+            fetchComments()
+            setCommentObj = {
+                comment:'',
+                user:profile._id
+            }
         }
     } 
 
 
     return ( 
+        <div>
+
         <div className="d-flex justify-content-between align-items-center">
             <img
             className="nav-profile-image-1 mr-3"
@@ -52,16 +51,17 @@ function AddEditComment({profile, post}) {
                         textAlign: "left",
                         fontWeight: "normal",
                     }}
-
-                    value = {comment.comment}
-                    onChange = {(e)=> handleComment(e)}
+                    value = {commentObj.comment}
+                    onChange = {(e)=> setCommentObj({...commentObj, comment:e.target.value})}
                     placeholder="Add a comment"
                     />
+        <button onClick={(e) => addComment(e)} className='post-btn'>Post</button>
                     <div className='d-flex justify-content-around ' style={{position:'absolute', width:'60px',top:'5px' , right:'10px', fontSize:'22px', color:'rgb(102,102,102)'}}>
                         <span className='round-hover px-2' ><BsEmojiSmile/></span>
                         <span className='round-hover px-2'><BsImage/></span>
                     </div>
             </div>
+        </div>
         </div>
      );
 }

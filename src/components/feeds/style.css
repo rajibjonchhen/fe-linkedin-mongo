@@ -137,9 +137,7 @@
   padding-top: 1px;
   border-radius: 50%;
 }
-.like-comment-share-save {
-  margin:'0 0'
-}
+
 .like-comment-share-save > p {
   padding: 5px;
   border-radius: 10px;
@@ -159,6 +157,27 @@
   margin-bottom:1px;
   background-color: rgb(55,143,233);
   border-radius: 50%;
+}
+
+.single-comment{
+  position:absolute;
+   width:60px;
+   top:5px;
+  right:10px;
+  font-size:22px;
+   color:rgb(102,102,102);
+   border-radius: 0 15px 15px 15px ;
+  }
+
+.post-btn{
+  border-radius: 30px;
+  background-color:rgb(11,101,194);
+  color: white;
+  font-weight: bold;
+  font-size:15px ;
+  padding:3px 10px;
+  margin: 5px 0 0 10px
+  
 }
 .modal-post-btn {
   border-radius: 99px;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Row, Button, Modal, Form, Dropdown } from "react-bootstrap";
 import "./style.css";
-import { parseISO, format } from "date-fns";
+import { parseISO, format, nextDay } from "date-fns";
 // import PostDropDown from "./PostDropDown";
 import { useState } from "react";
 import { StylesContext } from "@material-ui/styles";
@@ -18,6 +18,7 @@ function SingleNews({ post, fetchData, profile }) {
   const [addPost, setAddPost] = useState(false);
   const [showComment, setShowComment] = useState(false)
   const [showReations, setShowReations] = useState(false)
+  const [comments, setComments] = useState([])
   const showAddPost = () => setAddPost(true);
   const closeAddPost = () => setAddPost(false);
 
@@ -27,6 +28,7 @@ function SingleNews({ post, fetchData, profile }) {
   useEffect(() => {
     setPostId(post._id);
     setText(post.text);
+    fetchComments()
   }, []);
 
   const handleDeletePost = async () => {
@@ -104,8 +106,21 @@ function SingleNews({ post, fetchData, profile }) {
     if(response.ok){
       fetchData()
     }
-
   }
+
+  const fetchComments = async() => {
+    const response = await fetch(`${process.env.REACT_APP_PROD_URL}/posts/${post._id}/comments`)
+    try {
+      if(response.ok){
+        let data = await response.json()
+        setComments(data)
+    } else{
+      console.log('Error fetching comments')
+    }
+    } catch (error) {
+      console.log(error)
+    }
+}
 
   // forwardRef again here!
   // Dropdown needs access to the DOM of the Menu to measure it
@@ -131,6 +146,7 @@ function SingleNews({ post, fetchData, profile }) {
       );
     }
   );
+
 
   return (
     <div>{post &&
@@ -224,9 +240,11 @@ function SingleNews({ post, fetchData, profile }) {
           {/* add comment section */}
           <div style={{ display: showComment ? 'block' : 'none' }} >
             {/* comment box */}
-            {profile && <AddEditComment profile={profile} post={post} />}
+            {profile && <AddEditComment profile={profile} post={post} fetchComments={fetchComments}/>}
             {/* display comments */}
-            {/* {post && post.comments.map(comment => <DisplayComment comment={comment}/>)} */}
+            <div>
+            {comments && comments.map(comment => <DisplayComment key={comment._id} comment={comment}/>)}
+            </div>
           </div>
         </div>
       </Row>
