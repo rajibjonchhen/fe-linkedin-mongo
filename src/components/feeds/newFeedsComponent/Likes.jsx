@@ -13,12 +13,13 @@ function Likes({post, setShowReations}) {
        {post && post.likes.map((user, i ) => <div key={i} style={{font:'10px'}}>
 
             <div className='d-flex'>
-            <div className='round'>
+            <div className='round mr-3'>
                 <img src={user.image} className='round-pic' alt='user who has reacted'/>
             </div>
-            <div>
+            <div >
                <p>
                    {user.name}
+                   {user.surname}
                 </p> 
                <p>
                    {user.bio}

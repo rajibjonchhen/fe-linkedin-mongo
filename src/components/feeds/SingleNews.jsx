@@ -198,7 +198,7 @@ function SingleNews({ post, fetchData, profile }) {
                
                 <div className='d-flex justify-content-between text-left w-100  pb-1 border-bottom' style={{fontSize:'13px'}}>
                   <div className ='d-flex' onClick={(e) => setShowReations(true)} >
-                    <span style={{ display: post.likes.length>0? 'block' : 'none' }} className='likes mr-1 flip-horizontally'><AiFillLike/></span>
+                    <span style={{ display: post.likes.length>0? 'block' : 'none',color:'rgb(208,231,255)' }} className='likes mr-1 flip-horizontally'><AiFillLike/></span>
                     <span style={{ display: post.likes.length>0? 'block' : 'none' }}>{post.likes.length}</span>
                   </div>
                   <div>
@@ -209,7 +209,7 @@ function SingleNews({ post, fetchData, profile }) {
                   </div>
                 </div>
               
-                <div className="d-flex justify-content-between px-2 like-comment-share-save">
+                <div className="d-flex justify-content-between px-2 pt-1 like-comment-share-save">
                   <p className='d-flex align-items-baseline'
                     onClick={() => 
                       handleLike()
