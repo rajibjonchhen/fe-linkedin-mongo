@@ -6,9 +6,12 @@ import { parseISO, format } from "date-fns";
 import { useState } from "react";
 import { StylesContext } from "@material-ui/styles";
 import {BsImage, BsEmojiSmile} from 'react-icons/bs'
+import {BiLike} from 'react-icons/bi'
 import AddEditComment from "./newFeedsComponent/AddEditComment";
 import DisplayComment from "./newFeedsComponent/DisplayComment";
 import { GiLinkedRings } from "react-icons/gi";
+import Likes from "./newFeedsComponent/Likes";
+import PostEditDropdown from "./newFeedsComponent/PostEditDropdown";
 
 function SingleNews({ post, fetchData, profile }) {
   const [addPost, setAddPost] = useState(false);
@@ -114,7 +117,7 @@ function SingleNews({ post, fetchData, profile }) {
   );
 
   return (
-    <div>
+    <div>{post && 
       <Row
         className=" start-post-div px-4 pt-4 pb-2 flex-column mb-2"
         style={{ width: "550px" }}
@@ -148,138 +151,24 @@ function SingleNews({ post, fetchData, profile }) {
                   </p>
                   <p className="mb-n1" style={{ fontSize: "10px" }}>
                     {format(parseISO(post.updatedAt), "MMMM do yyyy | HH:mm")}
-                    <i className="bi bi-dot"></i> <i class="bi bi-globe2"></i>
+                    <i className="bi bi-dot"></i> <i className="bi bi-globe2"></i>
                   </p>
                 </div>
-                <div className="ml-auto d-flex align-items-center">
-                  {/* <Button
-                    onClick={showAddPost}
-                    className="py-0 shadow-none"
-                    size="sm"
-                    variant="secondary"
-                  >
-                    Edit
-                  </Button> */}
-                  <Dropdown alignRight>
-                    <Dropdown.Toggle
-                      alignRight
-                      as={CustomToggle}
-                      id="dropdown-custom-components"
-                      style={{ color: "black !important" }}
-                    >
-                      <i className="bi bi-three-dots single-post-three-dots"></i>
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu
-                      style={{ width: "240px" }}
-                      as={CustomMenu}
-                      alignRight
-                    >
-                      <div className="post-dropdown">
-                        <div
-                          onClick={showAddPost}
-                          className="d-flex align-items-center justify-content-between px-3 py-2 mx-2"
-                        >
-                          <i class="bi bi-pencil-square"></i>
-                          <div>
-                            <p
-                              className="mb-0"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Edit
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-download"></i>
-                          <div>
-                            <p
-                              className="mb-n1"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Save
-                            </p>
-                            <p className="mb-0" style={{ fontSize: "10px" }}>
-                              Save for later
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-link"></i>
-                          <div>
-                            <p
-                              className="mb-0"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Copy link to post
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-code-slash"></i>
-                          <div>
-                            <p
-                              className="mb-n1"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Embed this post
-                            </p>
-                            <p className="mb-0" style={{ fontSize: "10px" }}>
-                              Copy and Paste embed to you site
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-flag-fill"></i>
-                          <div>
-                            <p
-                              className="mb-n1"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Report this post
-                            </p>
-                            <p className="mb-0" style={{ fontSize: "10px" }}>
-                              I don't want to see this post
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-ui-radios"></i>
-                          <div>
-                            <p
-                              className="mb-n1"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Improve my feed
-                            </p>
-                            <p className="mb-0" style={{ fontSize: "10px" }}>
-                              Get recommended source to follow
-                            </p>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between px-3 py-2 mx-2">
-                          <i class="bi bi-eye-fill"></i>
-                          <div>
-                            <p
-                              className="mb-n1"
-                              style={{ fontWeight: "600", fontSize: "12px" }}
-                            >
-                              Who can see that post?
-                            </p>
-                            <p className="mb-0" style={{ fontSize: "10px" }}>
-                              Visible to anyone on or off LinkedIn
-                            </p>
-                          </div>
-                        </div>
+                      <div>
+                      <PostEditDropdown CustomToggle={CustomToggle} CustomMenu={CustomMenu} showAddPost={showAddPost}/>
                       </div>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
               </div>
               <div>
                 <p className="w-100">{post.text}</p>
               </div>
               <div>
+                <hr />
+                  <div className='text-left w-100'>
+                    <p><span className='likes'><BiLike/></span><span style={{display:post.likes.length? 'block':'none'}}>{post.likes.length}</span></p>
+                    <div>
+                      <Likes post={post}/>
+                    </div>
+                  </div>
                 <hr />
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
                   <p
@@ -289,26 +178,18 @@ function SingleNews({ post, fetchData, profile }) {
                         .forEach((item) => {
                           item.style.color = "blue";
                         });
-
-                      // for (let i = 0; i < x.length; i++) {
-                      //   x[i].style.color = "blue";
-                      // }
                     }}
                   >
                     <i
                       id="bi-hand-thumbs-up"
-                      class="bi bi-hand-thumbs-up mr-2"
+                      className="bi bi-hand-thumbs-up mr-2"
                       style={{ color: "grey", fontSize: "20px" }}
                     ></i>
                     Like
                   </p>
-                  <div>
-                    {/* {post && likes.map(like => <div>{like.}</div>)} */}
-                    <div></div>
-                  </div>
                   <p onClick = {(e) => setShowComment(true)}>
                     <i
-                      class="bi bi-chat-dots mr-2"
+                      className="bi bi-chat-dots mr-2"
                       style={{ color: "grey", fontSize: "20px" }}
                     ></i>
                     Comment
@@ -316,14 +197,14 @@ function SingleNews({ post, fetchData, profile }) {
                   <p>
                     <i
                       style={{ color: "grey", fontSize: "20px" }}
-                      class="bi bi-arrow-return-right mr-2"
+                      className="bi bi-arrow-return-right mr-2"
                     ></i>
                     Share
                   </p>
                   <p>
                     <i
                       style={{ color: "grey", fontSize: "20px" }}
-                      class="bi bi-send-fill mr-2"
+                      className="bi bi-send-fill mr-2"
                     ></i>
                     Send
                   </p>
@@ -331,15 +212,17 @@ function SingleNews({ post, fetchData, profile }) {
               </div>
             </div>
           </div>
+          <hr/>
           {/* add comment section */}
           <div style={{display:showComment? 'block':'none'}}>
                 {/* comment box */}
                {profile && <AddEditComment profile={profile} post={post}/>}
                 {/* display comments */}
-                  {post && post.comments.map(comment => <DisplayComment comment={comment}/>)}
+                  {/* {post && post.comments.map(comment => <DisplayComment comment={comment}/>)} */}
             </div>
         </div>
       </Row>
+}
       <Modal show={addPost} onHide={closeAddPost}>
         <Modal.Dialog className="w-100 border-0 px-3">
           <Modal.Header closeButton>

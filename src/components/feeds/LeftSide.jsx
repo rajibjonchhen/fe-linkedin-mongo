@@ -123,7 +123,7 @@ function LeftSide({ profile }) {
             UI & Microservices
           </p>
           <p>
-            Show more <i class="bi bi-chevron-down"></i>
+            Show more <i className="bi bi-chevron-down"></i>
           </p>
 
           <p className="mt-4 blue-link bold d-flex justify-content-between">

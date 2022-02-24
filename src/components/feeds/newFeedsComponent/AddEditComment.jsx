@@ -5,19 +5,35 @@ function AddEditComment({profile, post}) {
 
     const [comment, setComment] = useState({
         comment:'',
-        post:post._id
+        user:profile._id
     }) 
 
-    const AddComment = async() => {
+
+    const handleComment = (e) => {
+        e.target.preventDefault()
+        if(e.target.key !== 13){
+            setComment({comment:e.target.value})
+        } else {
+            addComment()
+        }
+    }
+
+
+    const addComment = async() => {
         const response = await fetch(`${process.env.React_APP_PROD_URL}/posts/${post._id}`,{
             method:'POST',
             body:JSON.stringify(comment),
                 headers:{
                     "Content-Type":"application/json"
                 }
-            
-        })
+            })
+        if(response.ok){
+            let data  = await response.json()
+            console.log(data)
+        }
     } 
+
+
     return ( 
         <div className="d-flex justify-content-between align-items-center">
             <img
@@ -36,8 +52,9 @@ function AddEditComment({profile, post}) {
                         textAlign: "left",
                         fontWeight: "normal",
                     }}
+                    
                     value = {comment.comment}
-                    onChange = {(e)=> setComment({comment:e.target.value})}
+                    onChange = {(e)=> handleComment(e)}
                     placeholder="Add a comment"
                     />
                     <div className='d-flex justify-content-around ' style={{position:'absolute', width:'60px',top:'5px' , right:'10px', fontSize:'22px', color:'rgb(102,102,102)'}}>

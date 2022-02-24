@@ -9,7 +9,7 @@ function RightSide() {
         style={{ fontSize: "12px" }}
       >
         <p className="h6 bold mb-2 d-flex justify-content-between">
-          Add to you feed <i class="bi bi-exclamation-diamond"></i>
+          Add to you feed <i className="bi bi-exclamation-diamond"></i>
         </p>
         <div className="d-flex mt-2">
           <div style={{ width: "75px", height: "75px", marginRight: "5px" }}>
@@ -63,7 +63,7 @@ function RightSide() {
           </div>
         </div>
         <p className="bold grey-hover mt-2 mb-n2">
-          View all recommendations <i class="bi bi-arrow-right"></i>
+          View all recommendations <i className="bi bi-arrow-right"></i>
         </p>
       </div>
       <div>
@@ -84,13 +84,13 @@ function RightSide() {
         <span>Help Center</span>
 
         <span>
-          Privacy & Terms <i class="bi bi-chevron-down"></i>
+          Privacy & Terms <i className="bi bi-chevron-down"></i>
         </span>
         <span>Ad Choices</span>
         <span>Advertising</span>
 
         <span>
-          Business Services <i class="bi bi-chevron-down"></i>
+          Business Services <i className="bi bi-chevron-down"></i>
         </span>
         <span>Get the LinkedIn app</span>
         <span>More</span>

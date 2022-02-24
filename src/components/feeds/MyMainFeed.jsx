@@ -4,8 +4,9 @@ import { Row, Col, Container } from "react-bootstrap";
 import NewsFeed from "./NewsFeed";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
-import Footer from "./Footer";
+
 import MyHeaderMain from "../profile/Header/MyHeaderMain";
+import Footer from "../profile/Header/Footer";
 
 function MyMainFeed({ profile }) {
   return (
