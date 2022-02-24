@@ -137,6 +137,9 @@
   padding-top: 1px;
   border-radius: 50%;
 }
+.like-comment-share-save {
+  margin:'0 0'
+}
 .like-comment-share-save > p {
   padding: 5px;
   border-radius: 10px;

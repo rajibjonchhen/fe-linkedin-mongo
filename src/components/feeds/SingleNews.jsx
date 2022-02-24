@@ -10,6 +10,7 @@ import { BiLike } from 'react-icons/bi'
 import AddEditComment from "./newFeedsComponent/AddEditComment";
 import DisplayComment from "./newFeedsComponent/DisplayComment";
 import { GiLinkedRings } from "react-icons/gi";
+import {AiFillLike, AiOutlineLike} from 'react-icons/ai'
 import Likes from "./newFeedsComponent/Likes";
 import PostEditDropdown from "./newFeedsComponent/PostEditDropdown";
 
@@ -186,19 +187,14 @@ function SingleNews({ post, fetchData, profile }) {
                 </div>
                 <hr />
                 <div className="d-flex justify-content-between px-2 like-comment-share-save">
-                  <p
+                  <div className='d-flex align-items-center'
                     onClick={() => 
                       handleLike()
-                        }
-                  >
-                    <i
-                      id="bi-hand-thumbs-up"
-                      className="bi bi-hand-thumbs-up mr-2"
-                      style={{ color: "grey", fontSize: "20px", backgroundColor:post.isLiked? "blue":"none" }}
-                
-                    ></i>
-                    Like
-                  </p>
+                        }>
+                    <span  style={{ color: "blue", fontSize: "20px", display:post.isLiked? "block":"none"}}><AiFillLike/></span>
+                    <span style={{ color: "blue", fontSize: "20px", display:!post.isLiked? "block":"none"}}><AiOutlineLike/></span>
+                   <span>Like</span>
+                  </div>
                   <p onClick={(e) => setShowComment(true)}>
                     <i
                       className="bi bi-chat-dots mr-2"
