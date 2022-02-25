@@ -153,7 +153,7 @@ function SingleNews({ post, fetchData, profile }) {
     <div>{post &&
       <Row
         className=" start-post-div px-4 pt-4 pb-2 flex-column mb-2"
-        style={{ width: "100%" }}
+        style={{ width: "550px" }}
       >
         <div>
           <div className="d-flex flex-column">
