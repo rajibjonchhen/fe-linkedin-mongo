@@ -83,7 +83,7 @@ export default function AddEditExperience({
     setShowAddExperience(false);
     try {
       let response = await fetch(
-        `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}/picture`,
+        `${process.env.REACT_APP_PROD_URL}/profiles/${userId}/experiences/${list._id}`,
         {
           method: "DELETE",
         }
