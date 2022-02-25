@@ -34,7 +34,7 @@ export default function  DropMore ({profile}) {
                                 </li>
                                 <li >
                                     <span className="mx-3"><GrDocument/></span>
-                                 <span className="text-left" onClick={(e) => downloadPDF()}>Build a resume</span>
+                                 <span className="text-left" onClick={(e) => downloadCSV()}>Build a resume</span>
                                 </li>
                             </ul>
     </>

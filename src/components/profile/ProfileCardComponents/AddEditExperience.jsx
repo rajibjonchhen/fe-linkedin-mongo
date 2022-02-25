@@ -68,10 +68,11 @@ export default function AddEditExperience({
       });
       if (response.ok) {
         let data = await response.json();
-        fetchExperiences();
+        console.log(data._id)
         if(data && selectedPic){
-            handleSavePic(data._id)
+          handleSavePic(data._id)
         }
+        fetchExperiences();
         console.log("display after adding experience", data);
         this.props.history.push("/profile");
       } else {
@@ -141,7 +142,7 @@ export default function AddEditExperience({
             <span>{selectedPic && selectedPic.name}</span>
           </div>
           <Button
-            style={{ display: showAddPic ? "block " : "none" }}
+            style={{ display: showAddPic ? "block " : "block", height:'50px' }}
             variant="success"
             onClick={(e) => handleSavePic(e)}
           >

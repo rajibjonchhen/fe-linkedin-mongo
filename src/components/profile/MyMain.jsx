@@ -17,14 +17,14 @@ function MyMain({ profile, setProfile, fetchProfile }) {
           marginRight: "-100px",
         }}
       >
-        <Col sm={10} lg={7}>
+        <Col xs={12} sm={10} md={12} lg={7}>
           <Main
             fetchProfile={fetchProfile}
             setProfile={setProfile}
             profile={profile}
           />
         </Col>
-        <Col sm={0} md={3} lg={3}>
+        <Col xs={12} sm={12} md={3} lg={3}>
           <Sidebar />
         </Col>
       </Row>
