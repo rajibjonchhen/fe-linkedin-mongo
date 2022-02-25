@@ -6,17 +6,23 @@ export default function  DropMore ({profile}) {
 
 
 
-    const downloadPDF = (e) => {
+    const downloadPDF = async(e) => {
         try {
-          window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/downloadPdf`);
+        const response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/downloadPdf`)
+        if(response.ok){
+            window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/downloadPdf`);
+        }
         } catch (error) {
           console.log(error);
         }
       };
 
-      const downloadCSV = (e) => {
+      const downloadCSV = async(e) => {
         try {
-          window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/experiences/csv`);
+            const response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/experiences/csv`)
+            if(response.ok){    
+            window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/experiences/csv`);
+            }
         } catch (error) {
           console.log(error);
         }

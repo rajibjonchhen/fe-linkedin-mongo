@@ -9,7 +9,7 @@ function DisplayComment({comment}) {
             <div>
                 <img src={comment.user.image || "https://www.pavilionweb.com/wp-content/uploads/2017/03/man.png"} className="nav-profile-image-1 mr-3" alt='user who  comment'/>
             </div>
-            <div className='p-2 w-100' style={{backgroundColor:'rgb(242,242,242)'}}>
+            <div className='p-2 w-100' style={{backgroundColor:'rgb(242,242,242)', fontSize:'12px'}}>
                     <p>{comment.comment}</p>
             </div>
         
