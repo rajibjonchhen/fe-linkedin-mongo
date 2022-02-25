@@ -1,6 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import axios from "axios";
 
 export default function AddEditExperience({
   setShowAddExperience,
@@ -58,25 +59,40 @@ export default function AddEditExperience({
       area: area,
     };
     console.log(experience);
-    try {
-      let response = await fetch(url, {
-        method,
-        body: JSON.stringify(experience),
-        headers: {
-          "Content-Type": "application/JSON",
-        },
-      });
-      if (response.ok) {
-        let data = await response.json();
-        fetchExperiences();
-        console.log("display after adding experience", data);
-        this.props.history.push("/profile");
-      } else {
-        console.log("error");
+    const formData = new FormData()
+    formData.append('experience',experience)
+    formData.append('image', selectedPic)
+    console.log(formData)
+    try{
+    let response = await axios.post(`http://localhost:3001/profiles/exp/${userId}`,formData,
+    {
+      headers:{
+        'Content-Type': 'multipart/form-data'
       }
-    } catch (error) {
-      console.log(error);
-    }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+    // try {
+      // let response = await fetch(url, {
+      //   method,
+      //   body: JSON.stringify(experience),
+      //   headers: {
+      //     "Content-Type": "application/JSON",
+      //   },
+      // });
+    //   if (response.ok) {
+    //     let data = await response.json();
+    //     fetchExperiences();
+    //     console.log("display after adding experience", data);
+    //     this.props.history.push("/profile");
+    //   } else {
+    //     console.log("error");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const handleDelete = async () => {
@@ -132,7 +148,7 @@ export default function AddEditExperience({
 
       <Modal.Body className="d-flex flex-column text-left">
         <div className="d-flex my-3">
-          <div style={{ display: showAddPic ? "block " : "none" }}>
+          <div style={{ display: showAddPic ? "block " : "block" }}>
             <label>Add Picture of Company</label>
             <input type="file" onChange={(e) => handleChangePic(e)} />
             <span>{selectedPic && selectedPic.name}</span>
