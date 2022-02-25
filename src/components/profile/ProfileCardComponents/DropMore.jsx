@@ -3,6 +3,25 @@ import {RiShareForwardFill} from 'react-icons/ri'
 import {FiDownload} from 'react-icons/fi'
 
 export default function  DropMore ({profile}) {
+
+
+
+    const downloadPDF = (e) => {
+        try {
+          window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/downloadPdf`);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      const downloadCSV = (e) => {
+        try {
+          window.location.replace(`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/experiences/csv`);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
     return (<>
          <ul className='list-unstyled'>
                                 <li >
@@ -11,11 +30,11 @@ export default function  DropMore ({profile}) {
                             </li>
                                 <li >
                                     <span className="mx-3"><FiDownload/></span>
-                                   <a href={`${process.env.REACT_APP_PROD_URL}/profiles/${profile._id}/downloadPdf`}> <span>Save to pdf</span> </a>
+                                  <span onClick={(e) => downloadPDF()}>Save to pdf</span> 
                                 </li>
                                 <li >
                                     <span className="mx-3"><GrDocument/></span>
-                                   <a href={`${process.env.REACT_APP_PROD_URL}`} ><span className="text-left">Build a resume</span> </a>
+                                 <span className="text-left" onClick={(e) => downloadPDF()}>Build a resume</span>
                                 </li>
                             </ul>
     </>

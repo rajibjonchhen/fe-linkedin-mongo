@@ -69,6 +69,9 @@ export default function AddEditExperience({
       if (response.ok) {
         let data = await response.json();
         fetchExperiences();
+        if(data && selectedPic){
+            handleSavePic(data._id)
+        }
         console.log("display after adding experience", data);
         this.props.history.push("/profile");
       } else {
@@ -132,7 +135,7 @@ export default function AddEditExperience({
 
       <Modal.Body className="d-flex flex-column text-left">
         <div className="d-flex my-3">
-          <div style={{ display: showAddPic ? "block " : "none" }}>
+          <div style={{ display: showAddPic ? "block " : "block" }}>
             <label>Add Picture of Company</label>
             <input type="file" onChange={(e) => handleChangePic(e)} />
             <span>{selectedPic && selectedPic.name}</span>
