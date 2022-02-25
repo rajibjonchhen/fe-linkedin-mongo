@@ -14,15 +14,7 @@ const OtherUser = ({ userId }) => {
 
   const fetchProfile = async (id) => {
     try {
-      let response = await fetch(
-        "http://localhost:3001/profiles/" + id,
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjA3YTRjZmY1ZjAwMTU5MGJkYjMiLCJpYXQiOjE2NDU1MTg2MDYsImV4cCI6MTY0NjcyODIwNn0.L81knB72Gai89P9eaaEd-av8iyNYN-iMk-sL_UOU-mY",
-          },
-        }
-      );
+      let response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/${id}`)
       if (response.ok) {
         let data = await response.json();
         setProfile(data);
