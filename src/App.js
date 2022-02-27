@@ -13,7 +13,7 @@ function App() {
   const [profile, setProfile] = useState();
 
   const fetchProfile = async () => {
-    let response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/6214fc2844fe9da6dc2d643f`
+    let response = await fetch(`${process.env.REACT_APP_PROD_URL}/profiles/6216a7b8ef817a8ff521af82`
     );
     let data = await response.json();
     if (data) {
