@@ -39,7 +39,7 @@ const PeopleViewed = () => {
             {" "}
             <h2 className="text-heading-medium pt-3">People also viewed</h2>
           </div>
-          {info.map((profile) => (
+          {info.slice(0, showMore).map((profile) => (
             <Link key={profile._id} to={"/OtherUser/" + profile._id}>
               <div className="" key={profile._id}>
                 <div className="text-dark font-weight-bolder d-flex" href="/">

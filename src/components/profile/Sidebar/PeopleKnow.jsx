@@ -38,7 +38,7 @@ const PeopleKnow = () => {
             {" "}
             <h2 className="text-heading-medium pt-3">People you may know</h2>
           </div>
-          {info.map((u) => (
+          {info.slice(0, showMore).map((u) => (
             <Link key={u._id} to={"/OtherUser/" + u._id}>
               <div className="" key={u._id}>
                 <div className="text-dark font-weight-bolder d-flex">
